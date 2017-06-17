@@ -18,7 +18,6 @@ public class MFrame extends JFrame{
         this.setExtendedState(MAXIMIZED_BOTH);
         gamePanel = new GamePanel(this);
         gamePanel.getField().createCastle();
-        //gamePanel.getField().createMobs();
         gamePanel.getField().createInformPanel();
     }
     
