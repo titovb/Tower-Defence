@@ -71,7 +71,7 @@ public class Field {
             public void run() {
                 for(int i=0;i<20;i++){
                     boolean Default = false;
-                    Mob mob = new MobLvl1(frame);
+                    Mob mob = new MobLvl2(frame);
                     switch(currentMobsLvl){
                         case 1:
                             mob = new MobLvl1(frame);

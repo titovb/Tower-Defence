@@ -8,11 +8,11 @@ public class MobLvl1 extends Mob{
     
     public MobLvl1(MFrame frame){
         super(frame);
-        super.attackDamage = 10;
-        super.maxHealthPoints = 100;
-        super.currentHealthPoints = maxHealthPoints;
-        super.currentLvl = 1;
-        super.priceForKill = 10;
+        this.attackDamage = 10;
+        this.maxHealthPoints = 100;
+        this.currentHealthPoints = maxHealthPoints;
+        this.currentLvl = 1;
+        this.priceForKill = 10;
     }
     
     private int lengthOfHP(){
