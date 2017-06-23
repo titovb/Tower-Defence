@@ -12,14 +12,14 @@ public class GamePanel{
     private JPanel panel;
     private Field gameField;
     private Tower pickedTower;
-    private int indexOfPT;
+    private int indexOfPickedTower;
     
     private class paintGP extends JPanel{
         
         @Override
         protected void paintComponent(Graphics g){
             if(gameField!=null)
-                gameField.paint(g);
+                gameField.paintField(g);
         }
     }
     
@@ -40,7 +40,7 @@ public class GamePanel{
                         }
                         pickedTower = gameField.getTowers().get(i);
                         pickedTower.setLabeled(true);
-                        indexOfPT = i;
+                        indexOfPickedTower = i;
                         gameField.getInfoPanel().towerPressed(pickedTower);
                     }
                 }
@@ -49,7 +49,8 @@ public class GamePanel{
             @Override
             public void mousePressed(MouseEvent e) {
                 if(gameField.getInfoPanel().getCurrentGold()>=50){ // 50 - price of buying tower 1 lvl.
-                    gameField.createTower(e.getX(), e.getY());
+                    Point click = new Point(e.getX(), e.getY());
+                    gameField.createTower(click);
                 }
             }
 
@@ -79,37 +80,37 @@ public class GamePanel{
                     
             }
             
-            public void towerUP(){
+            private void towerUP(){
                 pickedTower.setUpdated(true);
                 switch(pickedTower.getCurrentLvl()){
                     case 1:
-                        gameField.getTowers().set(indexOfPT, new TowerLvl2(frame, pickedTower.getCenter(), gameField.getMobs()));
+                        gameField.getTowers().set(indexOfPickedTower, new TowerLvl2(frame, pickedTower.getCenter(), gameField.getMobs()));
                         break;
                     case 2:
-                        gameField.getTowers().set(indexOfPT, new TowerLvl3(frame, pickedTower.getCenter(), gameField.getMobs()));
+                        gameField.getTowers().set(indexOfPickedTower, new TowerLvl3(frame, pickedTower.getCenter(), gameField.getMobs()));
                         break;
                     case 3:
-                        gameField.getTowers().set(indexOfPT, new TowerLvl4(frame, pickedTower.getCenter(), gameField.getMobs()));
+                        gameField.getTowers().set(indexOfPickedTower, new TowerLvl4(frame, pickedTower.getCenter(), gameField.getMobs()));
                         break;
                     case 4:
-                        gameField.getTowers().set(indexOfPT, new TowerLvl5(frame, pickedTower.getCenter(), gameField.getMobs()));
+                        gameField.getTowers().set(indexOfPickedTower, new TowerLvl5(frame, pickedTower.getCenter(), gameField.getMobs()));
                         break;
                     case 5:
-                        gameField.getTowers().set(indexOfPT, new TowerLvl6(frame, pickedTower.getCenter(), gameField.getMobs()));
+                        gameField.getTowers().set(indexOfPickedTower, new TowerLvl6(frame, pickedTower.getCenter(), gameField.getMobs()));
                         break;
                     case 6:
-                        gameField.getTowers().set(indexOfPT, new TowerLvl7(frame, pickedTower.getCenter(), gameField.getMobs()));
+                        gameField.getTowers().set(indexOfPickedTower, new TowerLvl7(frame, pickedTower.getCenter(), gameField.getMobs()));
                         break;
                     case 7:
-                        gameField.getTowers().set(indexOfPT, new TowerLvl8(frame, pickedTower.getCenter(), gameField.getMobs()));
+                        gameField.getTowers().set(indexOfPickedTower, new TowerLvl8(frame, pickedTower.getCenter(), gameField.getMobs()));
                         break;
                     case 8:
-                        gameField.getTowers().set(indexOfPT, new TowerLvl9(frame, pickedTower.getCenter(), gameField.getMobs()));
+                        gameField.getTowers().set(indexOfPickedTower, new TowerLvl9(frame, pickedTower.getCenter(), gameField.getMobs()));
                         break;
                     default:
                         break;
                 }
-                pickedTower = gameField.getTowers().get(indexOfPT);
+                pickedTower = gameField.getTowers().get(indexOfPickedTower);
                 pickedTower.setLabeled(true);
                 pickedTower.start();
                 gameField.getInfoPanel().towerReleased();

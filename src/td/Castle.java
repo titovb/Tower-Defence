@@ -37,12 +37,32 @@ public class Castle {
         this.currentHealthPoints = HP;
     }
     
-    private int lengthOfHP(){
-        double currentProcentOfHP = currentHealthPoints / (maxHealthPoints/100);
-        return (int)(currentProcentOfHP*(size.getX()/100));
+    private int lengthOfHealthPointsBar(){
+        double currentProcentOfHealthPoints = currentHealthPoints / (maxHealthPoints/100);
+        int maxProcents = 100;
+        return (int)(currentProcentOfHealthPoints*(size.getX()/maxProcents));
     }
     
-    public void paint(Graphics g){
+    private Color chooseColorForHealthPointsBar(){
+        int maxProcents = 100;
+        int minProcentForGreenColor = 61;
+        int maxProcentForOrangeColor = 60;
+        int minProcentForOrangeColor = 31;
+        int maxProcentForRedColor = 30;
+        Color returningColor =  null;
+        
+        if(lengthOfHealthPointsBar() >= (size.getX()/maxProcents) * minProcentForGreenColor)
+                returningColor = Color.GREEN;
+        if(lengthOfHealthPointsBar() <= (size.getX()/maxProcents) * maxProcentForOrangeColor && 
+           lengthOfHealthPointsBar() >= (size.getX()/maxProcents) * minProcentForOrangeColor)
+                returningColor = Color.ORANGE;
+        if(lengthOfHealthPointsBar() <= (size.getX()/maxProcents) * maxProcentForRedColor)
+                returningColor = Color.RED;
+        
+        return returningColor;
+    }
+    
+    public void paintCastle(Graphics g){
         Image img;
         
         String adr = "images\\castle\\Castle.png";
@@ -52,13 +72,9 @@ public class Castle {
         
         g.setColor(Color.BLACK);
         g.drawRect((int)(center.getX()-size.getX()/2), (int)(center.getY()-size.getY()/2+20), (int)size.getX(), 5);
-        if(lengthOfHP()>=(size.getX()/100)*60)
-            g.setColor(Color.GREEN);
-        if(lengthOfHP()<(size.getX()/100)*60&&lengthOfHP()>=(size.getX()/100)*30)
-            g.setColor(Color.ORANGE);
-        if(lengthOfHP()<=(size.getX()/100)*30)
-            g.setColor(Color.RED);
-        g.fillRect((int)(center.getX()-size.getX()/2), (int)(center.getY()-size.getY()/2+20), lengthOfHP(), 5);
+        
+        g.setColor(chooseColorForHealthPointsBar());
+        g.fillRect((int)(center.getX()-size.getX()/2), (int)(center.getY()-size.getY()/2+20), lengthOfHealthPointsBar(), 5);
     }
     
 }
